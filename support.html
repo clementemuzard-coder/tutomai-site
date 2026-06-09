@@ -4,109 +4,70 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Soporte — tutomAI</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #080810;
-      color: #e2e8f0;
-      min-height: 100vh;
-      padding: 48px 24px;
-    }
-    .container { max-width: 680px; margin: 0 auto; }
-    .logo { font-size: 36px; font-weight: 800; color: #818cf8; letter-spacing: -1px; margin-bottom: 8px; }
-    .logo span { color: #e8637a; }
-    .back { display: inline-block; color: #64748b; font-size: 14px; margin-bottom: 40px; text-decoration: none; }
-    .back:hover { color: #818cf8; }
-    h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
-    .subtitle { color: #64748b; font-size: 16px; margin-bottom: 48px; }
-    .section { margin-bottom: 40px; }
-    .section h2 { font-size: 18px; font-weight: 600; color: #818cf8; margin-bottom: 16px; }
-    .card {
-      background: #0f0f1a;
-      border: 1px solid #1e1e3f;
-      border-radius: 16px;
-      padding: 24px;
-      margin-bottom: 12px;
-    }
-    .card h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
-    .card p { font-size: 14px; color: #94a3b8; line-height: 1.6; }
-    .contact-btn {
-      display: inline-block;
-      background: #1e1e3f;
-      border: 1px solid #3730a3;
-      border-radius: 12px;
-      padding: 14px 28px;
-      color: #818cf8;
-      font-size: 15px;
-      font-weight: 600;
-      text-decoration: none;
-      margin-top: 8px;
-    }
-    .contact-btn:hover { background: #2d2d5f; }
-    .divider { height: 1px; background: #1e1e3f; margin: 40px 0; }
-    footer { text-align: center; color: #334155; font-size: 13px; margin-top: 60px; }
-    footer a { color: #475569; text-decoration: none; }
-    footer a:hover { color: #818cf8; }
-  </style>
+  <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
   <div class="container">
 
-    <div class="logo">tutom<span>AI</span></div>
-    <a href="/" class="back">← Volver al inicio</a>
+    <nav class="nav">
+      <a href="/" class="nav-brand">tutom<span>AI</span></a>
+      <a href="/" class="nav-back">Volver</a>
+    </nav>
 
-    <h1>Centro de soporte</h1>
-    <p class="subtitle">Estamos para ayudarte a que la noche salga bien.</p>
+    <header class="page-header">
+      <h1 class="page-title">Soporte</h1>
+      <p class="page-date">Respondemos en menos de 48 horas habiles.</p>
+    </header>
+
+    <div class="divider"></div>
 
     <div class="section">
-      <h2>Preguntas frecuentes</h2>
+      <p class="section-title">Preguntas frecuentes</p>
 
       <div class="card">
-        <h3>¿Como cancelo mi suscripcion PRO?</h3>
-        <p>En iOS: Ajustes → tu nombre → Suscripciones → tutomAI PRO → Cancelar suscripcion.<br>
-        En Android: Google Play → Perfil → Pagos y suscripciones → Suscripciones → tutomAI PRO → Cancelar.</p>
+        <p class="card-title">Como cancelo mi suscripcion PRO</p>
+        <p>En iOS: Ajustes — tu nombre — Suscripciones — tutomAI PRO — Cancelar suscripcion.<br>
+        En Android: Google Play — Perfil — Pagos y suscripciones — Suscripciones — tutomAI PRO — Cancelar.</p>
       </div>
 
       <div class="card">
-        <h3>No puedo iniciar sesion</h3>
-        <p>Verifica que tu correo este escrito correctamente. Si olvidaste tu contrasena, usa la opcion "¿olvidaste tu contrasena?" en la pantalla de login. Si el problema persiste, contactanos.</p>
+        <p class="card-title">No puedo iniciar sesion</p>
+        <p>Verifica que tu correo este escrito correctamente. Si olvidaste tu contrasena, usa la opcion de recuperacion en la pantalla de acceso. Si el problema persiste, escríbenos.</p>
       </div>
 
       <div class="card">
-        <h3>Compre PRO pero no se activo</h3>
-        <p>Ve a cualquier modo bloqueado → toca "Desbloquear PRO" → en la pantalla de pago busca la opcion "Restaurar compras". Si el problema persiste, contactanos con el comprobante de compra.</p>
+        <p class="card-title">Compre PRO pero no se activo</p>
+        <p>Ve a la pantalla de cualquier modo bloqueado, toca Desbloquear PRO y usa la opcion Restaurar compras. Si el problema persiste, escríbenos con el comprobante de tu compra.</p>
       </div>
 
       <div class="card">
-        <h3>La app se cierra o no carga</h3>
-        <p>Cierra la app completamente y vuelve a abrirla. Si el problema persiste, verifica que tengas la version mas reciente instalada desde la tienda. Si sigue fallando, contactanos indicando tu dispositivo y version del sistema operativo.</p>
+        <p class="card-title">La app no carga o se cierra</p>
+        <p>Cierra la aplicacion completamente y vuelve a abrirla. Asegurate de tener la version mas reciente instalada. Si el problema continua, indicanos tu dispositivo y version del sistema operativo.</p>
       </div>
 
       <div class="card">
-        <h3>¿Como funciona el sistema de creditos?</h3>
-        <p>Cada vez que la IA genera contenido consume un credito. El plan gratuito tiene un limite diario. El plan PRO tiene un limite mucho mayor. Los creditos se renuevan cada dia.</p>
+        <p class="card-title">Como funciona el sistema de creditos</p>
+        <p>Cada vez que la inteligencia artificial genera contenido se consume un credito. Los creditos se renuevan diariamente. El plan PRO incluye un limite diario considerablemente mayor que el plan gratuito.</p>
       </div>
     </div>
 
     <div class="divider"></div>
 
     <div class="section">
-      <h2>Contacto directo</h2>
+      <p class="section-title">Contacto</p>
       <div class="card">
-        <h3>Escríbenos por email</h3>
-        <p>Respondemos en menos de 48 horas hábiles. Incluye tu correo registrado en la app y una descripción del problema.</p>
-        <a href="mailto:soporte@tutomai.com" class="contact-btn">soporte@tutomai.com</a>
+        <p class="card-title">Correo electronico</p>
+        <p>Para consultas sobre tu cuenta, suscripcion o cualquier problema tecnico.</p>
+        <a href="mailto:soporte@tutomai.com" class="contact-link">soporte@tutomai.com</a>
       </div>
     </div>
 
-    <footer>
-      <p>
-        <a href="/privacy.html">Política de privacidad</a> ·
-        <a href="/terms.html">Términos y condiciones</a> ·
-        <a href="/">tutomAI</a>
-      </p>
-      <p style="margin-top: 8px;">© 2026 tutomAI. Todos los derechos reservados.</p>
+    <footer class="footer">
+      <span class="footer-copy">© 2026 tutomAI</span>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacidad</a>
+        <a href="/terms.html">Terminos</a>
+      </div>
     </footer>
 
   </div>
