@@ -61,15 +61,19 @@
         <p class="ea-disclaimer-small">Te llegará un correo con tu enlace de acceso si quedas dentro de los 100 cupos. Si la lista está llena, entras a la lista de espera y te avisamos apenas se libere un lugar.</p>
       </form>
 
-      <div class="ea-success" id="eaSuccess" hidden>
+    </section>
+
+    <div class="ea-overlay" id="eaOverlay" hidden>
+      <div class="ea-success" id="eaSuccess">
         <div class="ea-success-icon">
           <span class="ea-beer ea-beer-left">🍺</span>
           <span class="ea-beer ea-beer-right">🍺</span>
         </div>
         <h2 class="ea-success-title" id="successTitle">¡Estás dentro!</h2>
         <p class="ea-success-text" id="successText">Revisa tu correo en los próximos días: te enviaremos el enlace de acceso a tutomAI.</p>
+        <button type="button" class="btn btn-blue ea-overlay-close" id="eaOverlayClose">Listo</button>
       </div>
-    </section>
+    </div>
 
     <div class="divider"></div>
 
@@ -107,10 +111,11 @@
     const progressFill = document.getElementById('progressFill');
     const formSectionTitle = document.getElementById('formSectionTitle');
     const eaForm = document.getElementById('eaForm');
-    const eaSuccess = document.getElementById('eaSuccess');
+    const eaOverlay = document.getElementById('eaOverlay');
     const successTitle = document.getElementById('successTitle');
     const successText = document.getElementById('successText');
     const eaSubmit = document.getElementById('eaSubmit');
+    const eaOverlayClose = document.getElementById('eaOverlayClose');
 
     function renderCounter(remaining) {
       const safeRemaining = Math.max(0, remaining);
@@ -153,8 +158,7 @@
         });
         const data = await res.json();
 
-        eaForm.hidden = true;
-        eaSuccess.hidden = false;
+        eaOverlay.hidden = false;
 
         if (data.status === 'waitlist') {
           successTitle.textContent = 'Quedaste en lista de espera';
@@ -172,6 +176,11 @@
         eaSubmit.textContent = 'Quiero mi cupo';
         alert('Hubo un problema al enviar tu registro. Intenta nuevamente.');
       }
+    });
+
+    eaOverlayClose.addEventListener('click', () => {
+      eaOverlay.hidden = true;
+      eaForm.hidden = true;
     });
 
     loadCounter();
