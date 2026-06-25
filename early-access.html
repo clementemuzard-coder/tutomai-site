@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acceso anticipado — tutomAI</title>
+  <meta name="description" content="Sé de los primeros 100 en jugar tutomAI antes que nadie. Solo Android. Cupos limitados." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="m-strip"><span></span><span></span><span></span><span></span></div>
+
+  <div class="container container-ea">
+
+    <nav class="nav">
+      <a href="/" class="nav-brand">tutom<span class="accent">AI</span></a>
+      <a href="/" class="nav-back">Volver</a>
+    </nav>
+
+    <section class="ea-hero">
+      <span class="ea-badge">Postula ahora · Solo 100 cupos</span>
+      <h1 class="ea-title">El primer juego para carretear 100% chileno y con Inteligencia Artificial.</h1>
+      <p class="ea-sub">Estamos en pruebas cerradas. Abrimos <strong>100 cupos</strong> para jugarlo antes que todos. Cuando se acaben, entras a lista de espera.</p>
+
+      <div class="ea-counter-box" id="counterBox">
+        <div class="ea-counter-label">Cupos disponibles</div>
+        <div class="ea-counter-number" id="counterNumber">—</div>
+        <div class="ea-progress-track">
+          <div class="ea-progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="ea-form-section" id="formSection">
+      <p class="section-title" id="formSectionTitle">Reserva tu cupo</p>
+
+      <form id="eaForm" class="ea-form">
+        <div class="ea-field">
+          <label for="firstName">Nombre</label>
+          <input type="text" id="firstName" name="firstName" required autocomplete="given-name" />
+        </div>
+        <div class="ea-field">
+          <label for="lastName">Apellido</label>
+          <input type="text" id="lastName" name="lastName" required autocomplete="family-name" />
+        </div>
+        <div class="ea-field">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email" required autocomplete="email" />
+        </div>
+
+        <label class="ea-check">
+          <input type="checkbox" id="confirmAndroid" required />
+          <span>Confirmo que tengo un dispositivo Android</span>
+        </label>
+
+        <button type="submit" class="btn btn-red ea-submit" id="eaSubmit">Quiero mi cupo</button>
+        <p class="ea-disclaimer-small">Te llegará un correo con tu enlace de acceso si quedas dentro de los 100 cupos. Si la lista está llena, entras a la lista de espera y te avisamos apenas se libere un lugar.</p>
+      </form>
+
+      <div class="ea-success" id="eaSuccess" hidden>
+        <div class="ea-success-icon">
+          <span class="ea-beer ea-beer-left">🍺</span>
+          <span class="ea-beer ea-beer-right">🍺</span>
+        </div>
+        <h2 class="ea-success-title" id="successTitle">¡Estás dentro!</h2>
+        <p class="ea-success-text" id="successText">Revisa tu correo en los próximos días: te enviaremos el enlace de acceso a tutomAI.</p>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section ea-faq">
+      <p class="section-title">Antes de registrarte</p>
+      <div class="card">
+        <p class="card-title">¿Por qué solo Android?</p>
+        <p>Estamos en fase de pruebas cerradas en Google Play. La versión para iOS llega en una etapa posterior.</p>
+      </div>
+      <div class="card">
+        <p class="card-title">¿Cómo recibo el acceso?</p>
+        <p>Si quedas dentro de los 100 cupos, te enviamos un correo con el enlace para descargar la app de prueba directamente desde Google Play.</p>
+      </div>
+      <div class="card">
+        <p class="card-title">¿Qué pasa si se acaban los cupos?</p>
+        <p>Quedas en lista de espera con prioridad. Apenas liberemos más lugares, te avisamos primero a ti.</p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span class="footer-copy">© 2026 tutomAI</span>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacidad</a>
+        <a href="/terms.html">Términos</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwHbgW30Sx4lBO-89AHgApN3-SpJ5P9kEh-o2mkqaEKAbvNR7flJnKzaC2NRhua3Z_nAw/exec";
+    const TOTAL_SLOTS = 100;
+
+    const counterNumber = document.getElementById('counterNumber');
+    const progressFill = document.getElementById('progressFill');
+    const formSectionTitle = document.getElementById('formSectionTitle');
+    const eaForm = document.getElementById('eaForm');
+    const eaSuccess = document.getElementById('eaSuccess');
+    const successTitle = document.getElementById('successTitle');
+    const successText = document.getElementById('successText');
+    const eaSubmit = document.getElementById('eaSubmit');
+
+    function renderCounter(remaining) {
+      const safeRemaining = Math.max(0, remaining);
+      counterNumber.textContent = safeRemaining;
+      const pct = Math.min(100, Math.max(0, (safeRemaining / TOTAL_SLOTS) * 100));
+      progressFill.style.width = pct + '%';
+
+      if (safeRemaining <= 0) {
+        formSectionTitle.textContent = 'Lista de espera';
+        eaSubmit.textContent = 'Unirme a la lista de espera';
+        counterNumber.classList.add('ea-counter-zero');
+      }
+    }
+
+    async function loadCounter() {
+      try {
+        const res = await fetch(SCRIPT_URL + '?action=count');
+        const data = await res.json();
+        renderCounter(TOTAL_SLOTS - data.registered);
+      } catch (err) {
+        counterNumber.textContent = '?';
+      }
+    }
+
+    eaForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      eaSubmit.disabled = true;
+      eaSubmit.textContent = 'Enviando...';
+
+      const payload = {
+        firstName: document.getElementById('firstName').value.trim(),
+        lastName: document.getElementById('lastName').value.trim(),
+        email: document.getElementById('email').value.trim(),
+      };
+
+      try {
+        const res = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json();
+
+        eaForm.hidden = true;
+        eaSuccess.hidden = false;
+
+        if (data.status === 'waitlist') {
+          successTitle.textContent = 'Quedaste en lista de espera';
+          successText.textContent = 'Los 100 cupos ya se llenaron, pero quedaste con prioridad. Te avisaremos por correo apenas se libere un lugar.';
+        } else {
+          successTitle.textContent = '¡Estás dentro!';
+          successText.textContent = 'Revisa tu correo en los próximos días: te enviaremos el enlace de acceso a tutomAI.';
+        }
+
+        if (typeof data.registered === 'number') {
+          renderCounter(TOTAL_SLOTS - data.registered);
+        }
+      } catch (err) {
+        eaSubmit.disabled = false;
+        eaSubmit.textContent = 'Quiero mi cupo';
+        alert('Hubo un problema al enviar tu registro. Intenta nuevamente.');
+      }
+    });
+
+    loadCounter();
+  </script>
+</body>
+</html>
